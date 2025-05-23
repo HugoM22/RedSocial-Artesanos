@@ -21,6 +21,10 @@ app.get('/login', (req, res) => {
 });
 
 // Levantar Servidor 
+/*
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+}); */
+
+//Exportamos a vercel
+module.exports = app;
