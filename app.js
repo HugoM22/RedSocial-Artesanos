@@ -20,6 +20,12 @@ app.get('/login', (req, res) => {
     res.render('login', { title: 'Iniciar Sesion' });
 });
 
+// Pagina de registro 
+app.get('/registrar', (req, res) => {
+    res.render('registrar', { title: 'Crear Usuario' });
+});
+
+
 // Levantar Servidor 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
