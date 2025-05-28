@@ -24,7 +24,10 @@ app.get('/login', (req, res) => {
 app.get('/registrar', (req, res) => {
     res.render('registrar', { title: 'Crear Usuario' });
 });
-
+// Pagina de inicio 
+app.get('/inicio', (req, res) => {
+    res.render('inicio', { title: 'Inicio' });
+});
 
 // Levantar Servidor 
 app.listen(PORT, () => {
