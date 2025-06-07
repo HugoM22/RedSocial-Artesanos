@@ -38,8 +38,14 @@ Imagen.hasMany(Comentario, {foreignKey: 'imagen_id'});
 Comentario.belongsTo(Usuario, {foreignKey: 'usuario_id'});
 Usuario.hasMany(Comentario, {foreignKey: 'usuario_id'});
 
+//Relacion ImagenCompartida -> Imagen y Usuario
+ImagenCompartida.belongsTo(Imagen, {foreignKey: 'imagen_id'});
+Imagen.hasMany(ImagenCompartida, {foreignKey: 'imagen_id'});
+ImagenCompartida.belongsTo(Usuario, {foreignKey: 'usuario_id'});
+Usuario.hasMany(ImagenCompartida, {foreignKey: 'usuario_id'});
+
 //Relacion AlbumTag <-> Album , Tag 
-AlbumTag.belongsTo(Tag,{
+Album.belongsTo(Tag,{
     through: AlbumTag,
     foreignKey: 'album_id',
     otherKey: 'tag_id'
