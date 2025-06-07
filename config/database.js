@@ -1,3 +1,4 @@
+const mysql2= require('mysql2');
 const {Sequelize} = require('sequelize');
 
 const sequelize = new Sequelize(
@@ -6,11 +7,11 @@ const sequelize = new Sequelize(
     '', {
     host: 'localhost',
     dialect: 'mysql',
+    dialectModule: mysql2,
     logging: false,
     define:{
         freezeTableName: true,
         timestamps: false
     }
 });
-//Cambiar dato para darle de alta dx
 module.exports = sequelize;
