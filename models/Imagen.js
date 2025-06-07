@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes)=>{
         },
         archivo:{
             type: DataTypes.STRING(255),
-            allowNull
+            allowNull: false
         },
         titulo:{
             type: DataTypes.STRING(255),

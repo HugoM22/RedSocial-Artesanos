@@ -35,10 +35,14 @@ const sequelize = require('./config/database');
     try {
         await sequelize.authenticate();
         console.log('✅ Conexión a la base de datos.✅');
+        // Sincroniza tablas segun los modelos
+        await sequelize.sync({alter:true})
+        console.log('✅ Tablas sincronizadas correctamente');
     } catch (error) {
         console.error('⛔⛔ No se pudo conectar a la base de datos:', error);
     }
 })();
+require('./models'); // Cargar los modelos para establecer relaciones
 
 // Levantar Servidor 
 app.listen(PORT, () => {
