@@ -1,36 +1,42 @@
 const express = require('express');
 const path = require('path');
+const session = require('express-session');
+const sequelize = require('./config/database');
+require('./models');
 
 const app = express();
-const PORT = 3000;
+const PORT =  process.env.PORT || 3000;
 
-// Configuracion de Pug 
+// Configuracion de Vistas
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine','pug');
 
-// Arcivos estaticos
-app.use(express.static(path.join(__dirname,'public')));
+// Middlewares globlales
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+app.use('/public',express.static(path.join(__dirname,'public')));
 
-// Ruta de ejemplo 
+// --->Ruta de ejemplo<--- 
 app.get('/', (req, res) => {
     res.render('index', { title: 'Red Social de Artesanos' });
 });
-// Pagina de login 
 app.get('/login', (req, res) => {
     res.render('login', { title: 'Iniciar Sesion' });
 });
-
-// Pagina de registro 
 app.get('/registrar', (req, res) => {
     res.render('registrar', { title: 'Crear Usuario' });
 });
-// Pagina de inicio 
 app.get('/inicio', (req, res) => {
     res.render('inicio', { title: 'Inicio' });
 });
 
+// Manejo de rutas no encontradas
+app.use((req, res) => {
+    res.status(404).render('404', { title: 'Página no encontrada' });
+});
+
 //Probar conexion de base de datos 
-const sequelize = require('./config/database'); 
+// Middleware de session
 (async () => {
     try {
         await sequelize.authenticate();
@@ -42,8 +48,6 @@ const sequelize = require('./config/database');
         console.error('⛔⛔ No se pudo conectar a la base de datos:', error);
     }
 })();
-require('./models'); // Cargar los modelos para establecer relaciones
-
 // Levantar Servidor 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);

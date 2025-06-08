@@ -1,6 +1,6 @@
 const {Friend} = require('../models');
 
-modeule.exports ={
+module.exports ={
     async toggleAmigo(req, res, next) {
         try{
             const usuarioId = req.session.usuarioId;

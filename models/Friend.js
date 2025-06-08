@@ -7,7 +7,7 @@ module.exports =(sequelize, DataTypes) =>{
         },
         solicitante_id:{
             type: DataTypes.INTEGER,
-            allwoNull: false
+            allowNull: false
         },
         receptor_id:{
             type: DataTypes.INTEGER,
@@ -22,7 +22,7 @@ module.exports =(sequelize, DataTypes) =>{
             defaultValue: DataTypes.NOW
         }
     },{
-        tableNmae:'friend',
+        tableName:'friend',
         timestamps: false
     
     });

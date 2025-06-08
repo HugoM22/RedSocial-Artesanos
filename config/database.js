@@ -11,7 +11,9 @@ const sequelize = new Sequelize(
     logging: false,
     define:{
         freezeTableName: true,
-        timestamps: false
+        timestamps: true,
+        createdAt: 'creado_en',
+        updatedAt: 'actualizado_en',
     }
 });
 module.exports = sequelize;

@@ -45,7 +45,7 @@ ImagenCompartida.belongsTo(Usuario, {foreignKey: 'usuario_id'});
 Usuario.hasMany(ImagenCompartida, {foreignKey: 'usuario_id'});
 
 //Relacion AlbumTag <-> Album , Tag 
-Album.belongsTo(Tag,{
+Album.belongsToMany(Tag,{
     through: AlbumTag,
     foreignKey: 'album_id',
     otherKey: 'tag_id'

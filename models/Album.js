@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) =>{
         creado_en:{
             type: DataTypes.DATE,
             allowNull: false,
-            defaultValue: DataTypes.NOW
+            defaultValue: false
         }
     },{
         tableName: 'album',

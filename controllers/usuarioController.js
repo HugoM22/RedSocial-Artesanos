@@ -1,7 +1,7 @@
 const {Usuario, Album,Imagen,Friend} = require('../models');
-modeule.exports={
+module.exports={
     // Mostrar perfil del usuario con sus albumnes
-    async VerPefil(req,res,netx){
+    async verPefil(req,res,next){
         try{
             const usuarioId= req.params.id;
             const usuario = await Usuario.findByPk(usuarioId,{
@@ -34,7 +34,7 @@ modeule.exports={
             const usuarioId = req.session.usuarioId;
             const {nombre,email}=req.body;
         await Usuario.update({nombre,email},{where:{id:usuarioId}});
-            res.redirect(`/perfil/$P{usuarioId}`);
+            res.redirect(`/perfil/${usuarioId}`);
         }catch(err){
             next(err);
         }
