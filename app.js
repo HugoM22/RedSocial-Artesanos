@@ -16,6 +16,18 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use('/public',express.static(path.join(__dirname,'public')));
 
+//importar rutas
+const usuarioRoutes = require('./routes/usuarioRoutes');
+const albumRoutes = require('./routes/albumRoutes');
+const imagenRoutes = require('./routes/imageRoutes');
+const friendRoutes = require('./routes/friendRoutes');
+
+// Usar rutas
+app.use('/perfil', usuarioRoutes);
+app.use('/perfil',albumRoutes);
+app.use('/album', imagenRoutes);
+app.use('/friend', friendRoutes);
+
 // --->Ruta de ejemplo<--- 
 app.get('/', (req, res) => {
     res.render('index', { title: 'Red Social de Artesanos' });
@@ -30,7 +42,7 @@ app.get('/inicio', (req, res) => {
     res.render('inicio', { title: 'Inicio' });
 });
 
-// Manejo de rutas no encontradas
+// Manejo de rutas no encontradas 404
 app.use((req, res) => {
     res.status(404).render('404', { title: 'Página no encontrada' });
 });
