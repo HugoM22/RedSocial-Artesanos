@@ -1,7 +1,7 @@
 const {Usuario, Album,Imagen,Friend} = require('../models');
 module.exports={
     // Mostrar perfil del usuario con sus albumnes
-    async verPefil(req,res,next){
+    async verPerfil(req,res,next){
         try{
             const usuarioId= req.params.id;
             const usuario = await Usuario.findByPk(usuarioId,{
@@ -9,13 +9,13 @@ module.exports={
                 include:[
                     {
                         model: Album,
-                        attributes:['id','titulo','createdAt'],
+                        attributes:['id_album','titulo','creado_en'],
                     }
                 ]
             });
             if(!usuario)return res.status(404).render('404');
             res.render('perfil',{usuario});
-        }catch(error){
+        }catch(err){
             next(err);
         }
     },

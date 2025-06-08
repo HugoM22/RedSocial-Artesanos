@@ -6,8 +6,8 @@ module.exports={
         try{
             const usuarioId=req.params.id;
             const albums = await Album.findAll({
-                where: {usuarioId},
-                order: [['createdAt', 'DESC']]
+                where: {usuario_id: usuarioId},
+                order: [['creado_en', 'DESC']]
             });
             res.render('albums',{albums});
         }catch(err){
@@ -21,9 +21,9 @@ module.exports={
     //crear album
     async crear(req,res,next){
         try{
-            const usuairoId= req.session.usuarioId;
+            const usuarioId= req.session.usuarioId;
             const {titulo} = req.body;
-            await Album.create({titulo,usuarioId});
+            await Album.create({titulo,usuario_id: usuarioId});
             res.redirect(`/perfil/${usuarioId}`);
         }catch(err){
             next(err);

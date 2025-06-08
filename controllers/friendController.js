@@ -8,15 +8,18 @@ module.exports ={
 
             // ya existe relacion?
             const relacion = await Friend.findOne({
-                where:{usuarioId, amigoId}
+                where: {
+                    solicitante_id: usuarioId,
+                    receptor_id: amigoId
+                }
             });
             if(relacion){
                 await relacion.destroy();
-                return res.json({satuts:'eliminado'});
+                return res.json({status:'eliminado'});
             }
-            await Friend.create({usuarioId,amigoId});
-            res.json({status:'agregado'});
-        }catch(err){
+            await Friend.create({ solicitante_id: usuarioId, receptor_id: amigoId });
+            res.json({ status: 'agregado' });
+        } catch (err) {
             next(err);
         }
     }
