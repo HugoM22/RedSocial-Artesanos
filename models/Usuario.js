@@ -21,6 +21,10 @@ module.exports = (Sequelize, DataTypes) => {
             type: DataTypes.ENUM('MASCULINO', 'FEMENINO', 'OTRO'),
             allowNull: false
         },
+        intereses:{
+            type: DataTypes.STRING(255),
+            allowNull: false
+        },
         antecedentes:{
             type: DataTypes.STRING(255),
             allowNull: true
@@ -28,6 +32,12 @@ module.exports = (Sequelize, DataTypes) => {
         imagen_perfil:{
             type: DataTypes.STRING(255),
             allowNull: true
+        },
+        email:{
+            type:DataTypes.STRING(150),
+            allowNull:false,
+            unique:true,
+            validate:{isEmail:true}
         },
         creado_en:{
             type: DataTypes.DATE,

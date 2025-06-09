@@ -12,4 +12,4 @@ router.post(
     imagenController.subir
 );
 
-module.exports =router;
+module.exports = router;

@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
         email:{
             type: DataTypes.STRING(150),
             allowNull: false,
-            unique: true
+            unique: true,
+            validate:{ isEmail:true}
         },
         contrasenia:{
             type: DataTypes.STRING(255),

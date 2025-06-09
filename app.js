@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
 const session = require('express-session');
@@ -24,6 +25,7 @@ app.use(session({
     saveUninitialized:false
 }))
 //importar rutas
+const authRoutes = require('./routes/authRoutes');
 const usuarioRoutes = require('./routes/usuarioRoutes');
 const albumRoutes = require('./routes/albumRoutes');
 const imagenRoutes = require('./routes/imagenRoutes');
@@ -31,27 +33,14 @@ const homeRoutes = require('./routes/homeRoutes');
 const friendRoutes = require('./routes/friendRoutes');
 
 // Usar rutas
+app.use('/',authRoutes);
+app.use('/', homeRoutes);
 app.use('/perfil', usuarioRoutes);
 app.use('/perfil',albumRoutes);
 app.use('/album', imagenRoutes);
 app.use('/friend', friendRoutes);
-/*
-// --->Ruta de ejemplo<--- 
-app.get('/', (req, res) => {
-    res.render('index', { title: 'Red Social de Artesanos' });
-});
-app.get('/login', (req, res) => {
-    res.render('login', { title: 'Iniciar Sesion' });
-});
-app.get('/registrar', (req, res) => {
-    res.render('registrar', { title: 'Crear Usuario' });
-});
-app.get('/inicio', (req, res) => {
-    res.render('inicio', { title: 'Inicio' });
-});
-*/
 
-app.use('/', homeRoutes);
+
 
 // -----Manejo de 404-----
 app.use((req, res) => {
