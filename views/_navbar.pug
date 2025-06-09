@@ -1,0 +1,21 @@
+nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  .container
+    a.navbar-brand(href="/") Artesanos.com
+
+    button.navbar-toggler(type="button", data-bs-toggle="collapse", data-bs-target="#navbarNav")
+      span.navbar-toggler-icon
+
+    #navbarNav.collapse.navbar-collapse
+      ul.navbar-nav.ms-auto
+        //- Si hay sesión, mostramos enlaces de usuario
+        if typeof currentUser !== 'undefined' && currentUser
+          li.nav-item
+            a.nav-link(href=`/perfil/${currentUser}`) Mi perfil
+          li.nav-item
+            form(action="/logout", method="get")
+              button.btn.btn-link.nav-link(type="submit") Cerrar sesión
+        else
+          li.nav-item
+            a.nav-link(href="/login") Iniciar sesión
+          li.nav-item
+            a.nav-link(href="/registrar") Crear cuenta

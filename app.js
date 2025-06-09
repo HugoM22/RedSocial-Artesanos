@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const session = require('express-session');
@@ -16,10 +17,17 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use('/public',express.static(path.join(__dirname,'public')));
 
+//Sesiones
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave:false,
+    saveUninitialized:false
+}))
 //importar rutas
 const usuarioRoutes = require('./routes/usuarioRoutes');
 const albumRoutes = require('./routes/albumRoutes');
-const imagenRoutes = require('./routes/imageRoutes');
+const imagenRoutes = require('./routes/imagenRoutes');
+const homeRoutes = require('./routes/homeRoutes');
 const friendRoutes = require('./routes/friendRoutes');
 
 // Usar rutas
@@ -27,7 +35,7 @@ app.use('/perfil', usuarioRoutes);
 app.use('/perfil',albumRoutes);
 app.use('/album', imagenRoutes);
 app.use('/friend', friendRoutes);
-
+/*
 // --->Ruta de ejemplo<--- 
 app.get('/', (req, res) => {
     res.render('index', { title: 'Red Social de Artesanos' });
@@ -41,14 +49,16 @@ app.get('/registrar', (req, res) => {
 app.get('/inicio', (req, res) => {
     res.render('inicio', { title: 'Inicio' });
 });
+*/
 
-// Manejo de rutas no encontradas 404
+app.use('/', homeRoutes);
+
+// -----Manejo de 404-----
 app.use((req, res) => {
     res.status(404).render('404', { title: 'Página no encontrada' });
 });
 
-//Probar conexion de base de datos 
-// Middleware de session
+// ------Conexion y sincronizacion de la base de datos ------
 (async () => {
     try {
         await sequelize.authenticate();
@@ -58,9 +68,10 @@ app.use((req, res) => {
         console.log('✅ Tablas sincronizadas correctamente');
     } catch (error) {
         console.error('⛔⛔ No se pudo conectar a la base de datos:', error);
+        process.exit(1);
     }
 })();
-// Levantar Servidor 
+// --------Levantar Servidor-------- 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
 }); 

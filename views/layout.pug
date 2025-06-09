@@ -1,0 +1,27 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Artesanos.com – #{title}
+    // Aquí puedes enlazar tus estilos (Bootstrap, CSS propio...)
+    link(rel="stylesheet", href="/public/css/bootstrap.min.css")
+    link(rel="stylesheet", href="/public/css/app.css")
+  body
+    //- Incluimos siempre el navbar
+    include _navbar
+
+    //- Bloque para mensajes flash (si los implementas luego)
+    if success
+      each msg in success
+        .alert.alert-success(role="alert")= msg
+    if error
+      each msg in error
+        .alert.alert-danger(role="alert")= msg
+
+    //- Aquí va el contenido específico de cada página
+    block content
+
+    //- Scripts generales
+    script(src="/public/js/bootstrap.bundle.min.js")
+    script(src="/public/js/app.js")
