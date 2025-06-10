@@ -9,6 +9,9 @@ require('./models');
 const app = express();
 const PORT =  process.env.PORT || 3000;
 
+//Vercel
+app.set('trust proxy',1);
+
 // Configuracion de Vistas
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine','pug');
@@ -22,7 +25,11 @@ app.use('/public',express.static(path.join(__dirname,'public')));
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave:false,
-    saveUninitialized:false
+    saveUninitialized:false,
+    cookie:{
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 1000*60*60*24
+    }
 }))
 //importar rutas
 const authRoutes = require('./routes/authRoutes');

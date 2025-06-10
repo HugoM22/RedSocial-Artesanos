@@ -4,6 +4,10 @@ node_modules/
 # Entorno
 .env
 
+# Si usas variantes locales de dotenv
+.env.*.local
+.env.local
+
 # Logs
 npm-debug.log*
 yarn-debug.log*
@@ -14,16 +18,19 @@ logs/
 # Carpetas de subida (Multer)
 public/uploads/
 
+# Directorios de build / artefactos
+dist/
+build/
+
+# Carpetas de coverage de tests
+coverage/
+
+# Vercel (si te genera un folder .vercel)
+.vercel/
+
 # Archivos de sistema
 .DS_Store
 Thumbs.db
-
-# Directorios de cobertura de tests
-coverage/
-
-# Directorios de build
-dist/
-build/
 
 # Editor y OS
 .vscode/
