@@ -1,4 +1,5 @@
 require('dotenv').config();
+console.log('SESSION_SECRET →', process.env.SESSION_SECRET ? '🏷️ definido' : '❌ undefined'); 
 
 const express = require('express');
 const path = require('path');
@@ -23,7 +24,7 @@ app.use('/public',express.static(path.join(__dirname,'public')));
 
 //Sesiones
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET || 'dev_secret_temporal',
     resave:false,
     saveUninitialized:false,
     cookie:{
