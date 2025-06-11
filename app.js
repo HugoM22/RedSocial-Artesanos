@@ -9,7 +9,7 @@ const sequelize = require('./config/database');
 require('./models');
 
 const app = express();
-
+// 1) 
 app.get('/ping', (req, res) => {
   console.log('→ ¡Ping recibido en /ping!');
   res.send('pong');
