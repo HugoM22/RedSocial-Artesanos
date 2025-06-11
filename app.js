@@ -22,44 +22,42 @@ app.use((req, res, next) => {
 
 const PORT =  process.env.PORT || 3000;
 
-//Vercel
-app.set('trust proxy',1);
 
 // Configuracion de Vistas
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine','pug');
 
 
-// Middlewares globlales
-app.use(express.json());
-app.use(express.urlencoded({extended:true}));
-app.use('/public',express.static(path.join(__dirname,'public')));
+// // Middlewares globlales
+// app.use(express.json());
+// app.use(express.urlencoded({extended:true}));
+// app.use('/public',express.static(path.join(__dirname,'public')));
 
-//Sesiones
-app.use(session({
-    secret: process.env.SESSION_SECRET || 'dev_secret_temporal',
-    resave:false,
-    saveUninitialized:false,
-    cookie:{
-        secure: process.env.NODE_ENV === 'production',
-        maxAge: 1000*60*60*24
-    }
-}))
-//importar rutas
-const authRoutes = require('./routes/authRoutes');
-const usuarioRoutes = require('./routes/usuarioRoutes');
-const albumRoutes = require('./routes/albumRoutes');
-const imagenRoutes = require('./routes/imagenRoutes');
-const homeRoutes = require('./routes/homeRoutes');
-const friendRoutes = require('./routes/friendRoutes');
+// //Sesiones
+// app.use(session({
+//     secret: process.env.SESSION_SECRET || 'dev_secret_temporal',
+//     resave:false,
+//     saveUninitialized:false,
+//     cookie:{
+//         secure: process.env.NODE_ENV === 'production',
+//         maxAge: 1000*60*60*24
+//     }
+// }))
+// //importar rutas
+// const authRoutes = require('./routes/authRoutes');
+// const usuarioRoutes = require('./routes/usuarioRoutes');
+// const albumRoutes = require('./routes/albumRoutes');
+// const imagenRoutes = require('./routes/imagenRoutes');
+// const homeRoutes = require('./routes/homeRoutes');
+// const friendRoutes = require('./routes/friendRoutes');
 
-// Usar rutas
-app.use('/',authRoutes);
-app.use('/', homeRoutes);
-app.use('/perfil', usuarioRoutes);
-app.use('/perfil',albumRoutes);
-app.use('/album', imagenRoutes);
-app.use('/friend', friendRoutes);
+// // Usar rutas
+// app.use('/',authRoutes);
+// app.use('/', homeRoutes);
+// app.use('/perfil', usuarioRoutes);
+// app.use('/perfil',albumRoutes);
+// app.use('/album', imagenRoutes);
+// app.use('/friend', friendRoutes);
 
 
 
