@@ -1,4 +1,5 @@
 require('dotenv').config();
+console.log('→ ENV MYSQL_URL =', process.env.MYSQL_URL);
 console.log('SESSION_SECRET →', process.env.SESSION_SECRET ? '🏷️ definido' : '❌ undefined'); 
 
 const express = require('express');
