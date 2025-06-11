@@ -1,5 +1,5 @@
 require('dotenv').config();
-console.log('→ ENV MYSQL_URL =', process.env.MYSQL_URL);
+
 console.log('SESSION_SECRET →', process.env.SESSION_SECRET ? '🏷️ definido' : '❌ undefined'); 
 
 const express = require('express');
@@ -17,7 +17,10 @@ app.set('trust proxy',1);
 // Configuracion de Vistas
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine','pug');
-
+app.get('/ping', (req, res) => {
+  console.log('→ ¡Ping recibido en /ping!');
+  res.send('pong');
+});
 // Middlewares globlales
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
