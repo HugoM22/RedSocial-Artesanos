@@ -9,14 +9,7 @@ const sequelize = require('./config/database');
 require('./models');
 
 const app = express();
-const PORT =  process.env.PORT || 3000;
 
-//Vercel
-app.set('trust proxy',1);
-
-// Configuracion de Vistas
-app.set('views',path.join(__dirname,'views'));
-app.set('view engine','pug');
 app.get('/ping', (req, res) => {
   console.log('→ ¡Ping recibido en /ping!');
   res.send('pong');
@@ -26,6 +19,17 @@ app.use((req, res, next) => {
   console.log(`→ Req: ${req.method} ${req.url}`);
   next();
 });
+
+const PORT =  process.env.PORT || 3000;
+
+//Vercel
+app.set('trust proxy',1);
+
+// Configuracion de Vistas
+app.set('views',path.join(__dirname,'views'));
+app.set('view engine','pug');
+
+
 // Middlewares globlales
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
