@@ -21,6 +21,11 @@ app.get('/ping', (req, res) => {
   console.log('→ ¡Ping recibido en /ping!');
   res.send('pong');
 });
+// 2) Middleware de logging de cada request
+app.use((req, res, next) => {
+  console.log(`→ Req: ${req.method} ${req.url}`);
+  next();
+});
 // Middlewares globlales
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
