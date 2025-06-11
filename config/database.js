@@ -3,20 +3,21 @@ const mysql2= require('mysql2');
 const {Sequelize} = require('sequelize');
 
 const sequelize = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD, {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT || 3306,
-    dialect: 'mysql',
-    dialectModule: mysql2,
-    logging: false,
-    define:{
-        freezeTableName: true,
-        timestamps: true,
-        createdAt: 'creado_en',
-        updatedAt: 'actualizado_en',
-    }
+    process.env.MYSQL_DATABASE || process.env.MYSQLDATABASE,
+    process.env.MYSQLUSER,
+    process.env.MYSQLPASSWORD, 
+    {
+        host: process.env.MYSQLHOST,
+        port: process.env.MYSQLPORT,
+        dialect: 'mysql',
+        dialectModule: mysql2,
+        logging: false,
+        define:{
+            freezeTableName: true,
+            timestamps: true,
+            createdAt: 'creado_en',
+            updatedAt: 'actualizado_en',
+        }
 });
 module.exports = sequelize;
 
